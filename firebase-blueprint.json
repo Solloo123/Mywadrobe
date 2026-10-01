@@ -1,0 +1,590 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Stores user profile and personal styling preferences without sensitive PII.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID.",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name for greeting.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "bio": {
+          "type": "string",
+          "description": "Short personal style note.",
+          "maxLength": 300
+        },
+        "favoriteColors": {
+          "type": "array",
+          "description": "List of preferred clothing colors (max 15)."
+        },
+        "preferredStyles": {
+          "type": "array",
+          "description": "List of preferred fashion styles (max 15)."
+        },
+        "preferredFit": {
+          "type": "string",
+          "description": "Preferred garment silhouette fit.",
+          "enum": ["Slim", "Regular", "Relaxed", "Tailored", "Oversized"],
+          "maxLength": 40
+        },
+        "preferredOccasions": {
+          "type": "array",
+          "description": "List of common occasions the user dresses for (max 20)."
+        },
+        "locationCity": {
+          "type": "string",
+          "description": "City or region context for weather and culture (e.g. Dar es Salaam).",
+          "maxLength": 80
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when profile was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when profile was last updated."
+        }
+      },
+      "required": [
+        "userId",
+        "displayName",
+        "bio",
+        "favoriteColors",
+        "preferredStyles",
+        "preferredFit",
+        "preferredOccasions",
+        "locationCity",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "WardrobeItem": {
+      "title": "WardrobeItem",
+      "description": "Represents a single clothing or accessory item in a user's private digital wardrobe.",
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string",
+          "description": "Unique identifier of the wardrobe item.",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the wardrobe item owner.",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Descriptive name of the garment or accessory.",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "category": {
+          "type": "string",
+          "description": "Top-level wardrobe category.",
+          "enum": ["Tops", "Bottoms", "Footwear", "Accessories", "Traditional"],
+          "maxLength": 40
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "Specific garment type (e.g., Shirt, Chinos, Derby shoes, Kitenge, Kanzu).",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "Private image data URI or asset path for the garment.",
+          "minLength": 1,
+          "maxLength": 750000
+        },
+        "primaryColor": {
+          "type": "string",
+          "description": "Dominant color of the item.",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "secondaryColor": {
+          "type": "string",
+          "description": "Secondary or accent color of the item.",
+          "maxLength": 50
+        },
+        "pattern": {
+          "type": "string",
+          "description": "Surface pattern (e.g., Solid, Striped, Kitenge Geometric, Checked).",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "material": {
+          "type": "string",
+          "description": "Fabric or material composition (e.g., Linen, Cotton, Full-Grain Leather).",
+          "maxLength": 60
+        },
+        "formality": {
+          "type": "string",
+          "description": "Formality tier of the garment.",
+          "enum": ["Casual", "Smart Casual", "Business", "Formal", "Traditional / Ceremonial"],
+          "maxLength": 50
+        },
+        "style": {
+          "type": "string",
+          "description": "Aesthetic classification.",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "season": {
+          "type": "string",
+          "description": "Climate or season suitability.",
+          "enum": ["All-Season", "Hot / Dry", "Warm / Humid", "Cool / Evening", "Rainy"],
+          "maxLength": 40
+        },
+        "brand": {
+          "type": "string",
+          "description": "Label, tailor, or brand name.",
+          "maxLength": 80
+        },
+        "fit": {
+          "type": "string",
+          "description": "Garment cut or fit.",
+          "enum": ["Slim", "Regular", "Relaxed", "Tailored", "Oversized", "Standard"],
+          "maxLength": 40
+        },
+        "occasions": {
+          "type": "array",
+          "description": "Suitable occasions for this item (max 15)."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Personal styling or care notes.",
+          "maxLength": 500
+        },
+        "isFavorite": {
+          "type": "boolean",
+          "description": "Whether the item is marked as a wardrobe favorite."
+        },
+        "usageCount": {
+          "type": "integer",
+          "description": "Number of times worn or styled in outfits."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when item was added."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when item was last modified."
+        }
+      },
+      "required": [
+        "itemId",
+        "userId",
+        "name",
+        "category",
+        "subcategory",
+        "imageUrl",
+        "primaryColor",
+        "secondaryColor",
+        "pattern",
+        "material",
+        "formality",
+        "style",
+        "season",
+        "brand",
+        "fit",
+        "occasions",
+        "notes",
+        "isFavorite",
+        "usageCount",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Outfit": {
+      "title": "Outfit",
+      "description": "Represents a saved or generated outfit combination belonging to a user.",
+      "type": "object",
+      "properties": {
+        "outfitId": {
+          "type": "string",
+          "description": "Unique identifier of the outfit.",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the user who owns this outfit.",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "description": "Curated title of the look.",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "occasion": {
+          "type": "string",
+          "description": "Target occasion for this outfit.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "dressCode": {
+          "type": "string",
+          "description": "Interpreted dress code.",
+          "maxLength": 80
+        },
+        "timeOfDay": {
+          "type": "string",
+          "description": "Time of day context.",
+          "maxLength": 40
+        },
+        "locationContext": {
+          "type": "string",
+          "description": "Venue or environment setting.",
+          "maxLength": 100
+        },
+        "weatherContext": {
+          "type": "string",
+          "description": "Weather or climate condition.",
+          "maxLength": 80
+        },
+        "desiredStyle": {
+          "type": "string",
+          "description": "Requested aesthetic direction.",
+          "maxLength": 80
+        },
+        "itemIds": {
+          "type": "array",
+          "description": "Array of wardrobe item IDs comprising this outfit (max 12)."
+        },
+        "explanation": {
+          "type": "string",
+          "description": "User-friendly explanation of why this outfit works.",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "missingItems": {
+          "type": "array",
+          "description": "List of missing wardrobe pieces noted during styling (max 10)."
+        },
+        "rating": {
+          "type": "string",
+          "description": "User feedback rating for the outfit.",
+          "enum": ["love", "good", "dislike", "unrated"],
+          "maxLength": 20
+        },
+        "isFavorite": {
+          "type": "boolean",
+          "description": "Whether the outfit is bookmarked in favorites."
+        },
+        "wearCount": {
+          "type": "integer",
+          "description": "Number of times the user has worn this outfit."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when outfit was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when outfit was last updated."
+        }
+      },
+      "required": [
+        "outfitId",
+        "userId",
+        "title",
+        "occasion",
+        "dressCode",
+        "timeOfDay",
+        "locationContext",
+        "weatherContext",
+        "desiredStyle",
+        "itemIds",
+        "explanation",
+        "missingItems",
+        "rating",
+        "isFavorite",
+        "wearCount",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "StyleFeedback": {
+      "title": "StyleFeedback",
+      "description": "Records user style learning feedback signals on generated outfits.",
+      "type": "object",
+      "properties": {
+        "feedbackId": {
+          "type": "string",
+          "description": "Unique feedback ID.",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the user submitting feedback.",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "outfitId": {
+          "type": "string",
+          "description": "Referenced outfit ID.",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "rating": {
+          "type": "string",
+          "description": "Feedback sentiment.",
+          "enum": ["love", "good", "dislike"],
+          "maxLength": 20
+        },
+        "occasion": {
+          "type": "string",
+          "description": "Occasion associated with the rated outfit.",
+          "maxLength": 100
+        },
+        "preferredStyle": {
+          "type": "string",
+          "description": "Style tag associated with the rated outfit.",
+          "maxLength": 80
+        },
+        "dominantColors": {
+          "type": "array",
+          "description": "Colors present in the rated outfit (max 10)."
+        },
+        "comments": {
+          "type": "string",
+          "description": "Optional user note.",
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when feedback was recorded."
+        }
+      },
+      "required": [
+        "feedbackId",
+        "userId",
+        "outfitId",
+        "rating",
+        "occasion",
+        "preferredStyle",
+        "dominantColors",
+        "comments",
+        "createdAt"
+      ]
+    },
+    "TripPlan": {
+      "title": "TripPlan",
+      "description": "Represents a travel capsule packing list created in the stylist for a destination and duration.",
+      "type": "object",
+      "properties": {
+        "tripId": {
+          "type": "string",
+          "description": "Unique identifier of the trip plan.",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the user who owns this trip plan.",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the trip packing list.",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "destination": {
+          "type": "string",
+          "description": "Travel destination city or region.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "durationDays": {
+          "type": "integer",
+          "description": "Duration of the trip in days (1 to 30)."
+        },
+        "climate": {
+          "type": "string",
+          "description": "Expected destination climate.",
+          "maxLength": 80
+        },
+        "tripVibe": {
+          "type": "string",
+          "description": "Primary purpose or dress vibe of the trip.",
+          "maxLength": 80
+        },
+        "itemIds": {
+          "type": "array",
+          "description": "Optimized wardrobe item IDs recommended to pack (max 25)."
+        },
+        "packedItemIds": {
+          "type": "array",
+          "description": "Subset of itemIds already checked off as packed (max 25)."
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Stylist explanation of why this capsule works for the trip.",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "outfitCombinationsCount": {
+          "type": "integer",
+          "description": "Number of mix-and-match outfits unlocked by this capsule."
+        },
+        "missingSuggestions": {
+          "type": "array",
+          "description": "Optional missing items noted for the trip (max 10)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when trip plan was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when trip plan was last updated."
+        }
+      },
+      "required": [
+        "tripId",
+        "userId",
+        "title",
+        "destination",
+        "durationDays",
+        "climate",
+        "tripVibe",
+        "itemIds",
+        "packedItemIds",
+        "rationale",
+        "outfitCombinationsCount",
+        "missingSuggestions",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "OutfitCalendarEntry": {
+      "title": "OutfitCalendarEntry",
+      "description": "Represents a past logged or upcoming scheduled outfit on a specific calendar date.",
+      "type": "object",
+      "properties": {
+        "entryId": {
+          "type": "string",
+          "description": "Unique identifier for the calendar entry."
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the user who owns this calendar entry."
+        },
+        "dateKey": {
+          "type": "string",
+          "description": "ISO date string in YYYY-MM-DD format.",
+          "minLength": 10,
+          "maxLength": 20
+        },
+        "outfitId": {
+          "type": "string",
+          "description": "Reference ID of the scheduled or logged outfit."
+        },
+        "title": {
+          "type": "string",
+          "description": "Display title of the outfit on the calendar.",
+          "minLength": 1,
+          "maxLength": 150
+        },
+        "occasion": {
+          "type": "string",
+          "description": "Occasion for the scheduled or worn outfit.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "status": {
+          "type": "string",
+          "enum": ["worn", "planned"],
+          "description": "Whether the outfit was already worn or is scheduled for an upcoming date."
+        },
+        "itemIds": {
+          "type": "array",
+          "description": "Array of WardrobeItem IDs in this calendar entry (max 15)."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional user notes for the calendar date.",
+          "maxLength": 400
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when entry was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when entry was last updated."
+        }
+      },
+      "required": [
+        "entryId",
+        "userId",
+        "dateKey",
+        "outfitId",
+        "title",
+        "occasion",
+        "status",
+        "itemIds",
+        "notes",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile and styling preferences, isolated per authenticated user."
+    },
+    "/wardrobeItems/{itemId}": {
+      "schema": { "$ref": "#/entities/WardrobeItem" },
+      "description": "Private digital wardrobe clothing and accessory items owned by a specific user."
+    },
+    "/outfits/{outfitId}": {
+      "schema": { "$ref": "#/entities/Outfit" },
+      "description": "Generated and saved outfit combinations owned by a specific user."
+    },
+    "/feedback/{feedbackId}": {
+      "schema": { "$ref": "#/entities/StyleFeedback" },
+      "description": "User rating and style learning feedback records."
+    },
+    "/trips/{tripId}": {
+      "schema": { "$ref": "#/entities/TripPlan" },
+      "description": "Saved travel packing capsule lists owned by a specific user."
+    },
+    "/calendarEntries/{entryId}": {
+      "schema": { "$ref": "#/entities/OutfitCalendarEntry" },
+      "description": "Logged past outfits and scheduled upcoming outfits by calendar date."
+    }
+  }
+}
+

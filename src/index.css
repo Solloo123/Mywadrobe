@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-canvas: #FAF8F5;
+    --bg-surface: #F2EFE9;
+    --bg-elevated: #FFFFFF;
+    --text-primary: #181615;
+    --text-secondary: #5C564F;
+    --text-muted: #8A8279;
+    --border-hairline: rgba(24, 22, 21, 0.08);
+    --accent-primary: #8C5A32;
+    --accent-hover: #734825;
+  }
+
+  .dark {
+    --bg-canvas: #11100F;
+    --bg-surface: #1A1816;
+    --bg-elevated: #221F1C;
+    --text-primary: #F5F2EB;
+    --text-secondary: #B8B0A4;
+    --text-muted: #7D756B;
+    --border-hairline: rgba(245, 242, 235, 0.09);
+    --accent-primary: #D4A373;
+    --accent-hover: #E2B689;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  .dark body {
+    letter-spacing: 0.01em;
+  }
+
+  h1, h2, .font-display {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    text-wrap: balance;
+  }
+
+  .font-mono-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
